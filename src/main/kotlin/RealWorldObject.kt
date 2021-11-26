@@ -1,0 +1,1 @@
+class RealWorldObject (val name: String, var height: Int, var width: Int, var length: Int)
