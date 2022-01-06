@@ -1,1 +1,1 @@
-data class TimeLocation( var location: Location)
+data class TimeLocation( var location: ILocation)

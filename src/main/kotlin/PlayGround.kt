@@ -1,0 +1,1 @@
+class PlayGround(override var name: String = "PlayGround") : ILocation

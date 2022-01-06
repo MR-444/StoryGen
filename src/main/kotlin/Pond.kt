@@ -1,0 +1,1 @@
+class Pond(override var name: String = "Pond") : ILocation

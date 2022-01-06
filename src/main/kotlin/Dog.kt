@@ -1,10 +1,11 @@
 data class Dog(
     override val name: String,
     override var health: Int,
-    override var location: Location,
+    override var location: ILocation,
     var height: Double) : Monster(name, health, location) {
 
     override val locationHistory = LocationStack()
+    val memory = Memory(location)
 
     val bark = "woof"
 
@@ -13,7 +14,7 @@ data class Dog(
 
     fun giveLastVisitedLocation() = locationHistory.peek()?.location?.name
 
-    override fun moveToAndBack(destination: Location) {
+    override fun moveToAndBack(destination: ILocation) {
         //remember the actual location
         say("I am at the ${location.name}.")
         locationHistory.push(TimeLocation(location))
@@ -26,7 +27,7 @@ data class Dog(
         locationHistory.push(TimeLocation(destination))
     }
 
-    override fun jumpOver(location: Location, realWorldObject: RealWorldObject) {
+    override fun jumpOver(location: ILocation, realWorldObject: RealWorldObject) {
         println()
         println("Command: ${this.name} move to ${location.name} and back. And jump over the ${realWorldObject.name}.")
 

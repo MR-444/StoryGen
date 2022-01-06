@@ -1,6 +1,6 @@
 fun main() {
     // instantiate objects
-    val playGround = Location("playground")
+    val playGround = LocationFactory("PlayGround")
     val fido = Dog(
         name = "Fido",
         health = 100,
@@ -21,7 +21,7 @@ fun main() {
     println("${fido.name} runs happily around in the ${playGround.name}.")
 
     // let's travel the dog between 2 locations
-    val duckPond = Location(name = "duck pond")
+    val duckPond = LocationFactory("Pond")
 
     println()
     println("Command: ${fido.name} move to ${duckPond.name} and back.")

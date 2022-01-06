@@ -1,4 +1,6 @@
-abstract class Monster (open val name: String, open var health: Int, open var location: Location){
+abstract class Monster (open val name: String,
+                        open var health: Int,
+                        open var location: ILocation): LandDweller{
 
     abstract val locationHistory : LocationStack
 
@@ -12,11 +14,11 @@ abstract class Monster (open val name: String, open var health: Int, open var lo
     }
 
     // move actions
-    abstract fun moveToAndBack(destination: Location)
+    abstract fun moveToAndBack(destination: ILocation)
 
     /**
      * Jump over an object and the move to a location.
      *
      */
-    abstract fun jumpOver(location: Location, realWorldObject: RealWorldObject)
+    abstract fun jumpOver(location: ILocation, realWorldObject: RealWorldObject)
 }
