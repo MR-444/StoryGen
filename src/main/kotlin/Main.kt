@@ -1,6 +1,7 @@
 fun main() {
     // instantiate objects
     val playGround = LocationFactory("PlayGround")
+    val pond = LocationFactory("Pond")
     val fido = Dog(
         name = "Fido",
         health = 100,
@@ -21,25 +22,23 @@ fun main() {
     println("${fido.name} runs happily around in the ${playGround.name}.")
 
     // let's travel the dog between 2 locations
-    val duckPond = LocationFactory("Pond")
-
     println()
-    println("Command: ${fido.name} move to ${duckPond.name} and back.")
-    fido.moveToAndBack(duckPond)
+    println("Command: ${fido.name} move to ${pond.name} and back.")
+    fido.moveToAndBack(pond, null)
 
     fido.say("I am at ${fido.location.name} and have visited the ${fido.giveLastVisitedLocation()}")
 
     // let's travel the dog between 2 locations
-    // and put an obstacles
+    // and put an obstacle between the locations.
     val smallBox = RealWorldObject(name = "small box", height = 1, width = 1, length = 1)
 
-    fido.jumpOver(duckPond, smallBox)
+    fido.moveToAndBack(pond, smallBox)
 
     // let's travel the dog between 2 locations
-    // and put an obstacles
+    // and put an obstacle between the locations which is to big to jump over.
     val bigBox = RealWorldObject(name = "big box", height = 51, width = 1, length = 1)
 
-    fido.jumpOver(duckPond, bigBox)
+    fido.moveToAndBack(pond, bigBox)
 }
 
 

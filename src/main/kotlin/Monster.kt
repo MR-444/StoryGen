@@ -14,11 +14,11 @@ abstract class Monster (open val name: String,
     }
 
     // move actions
-    abstract fun moveToAndBack(destination: ILocation)
+    abstract fun moveToAndBack(destination: ILocation, realWorldObject: RealWorldObject?)
 
     /**
-     * Jump over an object and the move to a location.
+     * Jump over an object
      *
      */
-    abstract fun jumpOver(location: ILocation, realWorldObject: RealWorldObject)
+    abstract fun jumpOver(realWorldObject: RealWorldObject):Boolean
 }
