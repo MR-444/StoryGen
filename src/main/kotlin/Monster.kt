@@ -1,8 +1,10 @@
+import java.util.LinkedList
+
 abstract class Monster (open val name: String,
                         open var health: Int,
                         open var location: ILocation): LandDweller{
 
-    abstract val locationHistory : LocationStack
+    abstract val locationHistory : LinkedList<ILocation>
 
     fun healthToLiteral() = when (health){
             100 -> Health.Healthy.text

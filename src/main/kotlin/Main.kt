@@ -21,12 +21,12 @@ fun main() {
     println()
     println("${fido.name} runs happily around in the ${playGround.name}.")
 
+    // =======================================================================
     // let's travel the dog between 2 locations
     println()
-    println("Command: ${fido.name} move to ${pond.name} and back.")
     fido.moveToAndBack(pond, null)
 
-    fido.say("I am at ${fido.location.name} and have visited the ${fido.giveLastVisitedLocation()}")
+    fido.say("I am at ${fido.location.name} and have visited the ${fido.giveLastVisitedLocation().name}")
 
     // let's travel the dog between 2 locations
     // and put an obstacle between the locations.
