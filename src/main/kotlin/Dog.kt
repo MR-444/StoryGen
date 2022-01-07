@@ -78,7 +78,7 @@ data class Dog(
     private fun canJumpOver(realWorldObject: RealWorldObject): Boolean =
         (realWorldObject.height <= this.height && realWorldObject.length <= this.height)
 
-    private fun printLocationHistory() {
+    fun printLocationHistory() {
         println()
         print("LocationHistory: ")
 
