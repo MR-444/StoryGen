@@ -33,7 +33,7 @@ fun main() {
     fido.moveToAndBack(pond, smallBox)
 
     // let's travel the dog between 2 locations
-    // and put an obstacle between the locations which is to big to jump over.
+    // and put an obstacle between the locations which is too big to jump over.
     val bigBox = RealWorldObject(name = "big box", height = 51, width = 1, length = 1)
 
     fido.moveToAndBack(pond, bigBox)

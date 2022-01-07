@@ -12,59 +12,59 @@ data class Dog(
 
     fun say(s: String) = println (s)
 
-    fun giveLastVisitedLocation(): ILocation = locationHistory.last
-
     override fun moveToAndBack(destination: ILocation, realWorldObject: RealWorldObject?) {
 
         println()
-        println("Command: ${name} move to ${destination.name} and back.")
-        say("I am starting at the ${location.name}.")
 
         if (realWorldObject == null ) {
 
-            printLocationHistory()
-
-            // just move to another location
-            //remember the actual starting location
-            locationHistory.add(location)
-
-            say("I am running to the ${destination.name}.")
-
-            location= destination
-            locationHistory.add(destination)
-            say("I am now at ${destination.name}.")
+            println("Command: $name move to ${destination.name} and back.")
+            say("I am starting at the ${location.name}.")
 
             printLocationHistory()
 
-            // run back
-            // add the new destination which was the start.
-            say("I am running back to the ${getSuccessorLocation(this.location).name}.")
-            locationHistory.add(getSuccessorLocation(this.location))
-            location = getSuccessorLocation(this.location)
-
-            printLocationHistory()
-
-            this.say("I am at ${location.name} and have visited the ${getSuccessorLocation(this.location).name}.")
+            moveTo(destination)
+            runBack()
         }
         else
         {   // move to another location with an obstacle between
+            println("Command: $name move to ${destination.name} and back.")
             println("And jump over the ${realWorldObject.name}.")
+            say("I am starting at the ${location.name}.")
+
             if (jumpOver(realWorldObject)) {
-                rememberDestination(destination)
+                moveTo(destination)
+                runBack()
             }
         }
     }
 
-    private fun getSuccessorLocation (location: ILocation) : ILocation
-    {
-        println("Returned Element: " + locationHistory[locationHistory.lastIndexOf(location)-1])
-        return locationHistory[locationHistory.lastIndexOf(location)-1]
+    private fun runBack() {
+        // run back
+        // add the new destination which was the start.
+        say("I am running back to the ${getSuccessorLocation(location).name}.")
+
+        location = getSuccessorLocation(location)
+        locationHistory.add(location)
+
+        this.say("I am at ${location.name} and have visited the ${getSuccessorLocation(location).name}.")
     }
 
-    private fun rememberDestination(destination: ILocation) {
-        //remember the destination location now the old one...
-        say("I am running back to the ${locationHistory[locationHistory.size - 1].name}.")
+    private fun moveTo(destination: ILocation) {
+        // just move to another location
+        //remember the actual starting location
+        locationHistory.add(location)
+
+        say("I am running to the ${destination.name}.")
+
+        location = destination
         locationHistory.add(destination)
+        say("I am now at ${destination.name}.")
+    }
+
+    private fun getSuccessorLocation (location: ILocation) : ILocation
+    {
+        return locationHistory[locationHistory.lastIndexOf(location)-1]
     }
 
     override fun jumpOver(realWorldObject: RealWorldObject) :Boolean {
