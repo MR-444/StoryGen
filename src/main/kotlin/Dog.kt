@@ -4,19 +4,20 @@ data class Dog(
     override val name: String,
     override var health: Int,
     override var location: ILocation,
-    var height: Double) : Monster(name, health, location) {
+    var height: Double
+) : Monster(name, health, location) {
 
     override val locationHistory = LinkedList<ILocation>()
 
     val bark = "woof"
 
-    fun say(s: String) = println (s)
+    fun say(s: String) = println(s)
 
     override fun moveToAndBack(destination: ILocation, realWorldObject: RealWorldObject?) {
 
         println()
 
-        if (realWorldObject == null ) {
+        if (realWorldObject == null) {
 
             println("Command: $name move to ${destination.name} and back.")
             say("I am starting at the ${location.name}.")
@@ -25,9 +26,7 @@ data class Dog(
 
             moveTo(destination)
             runBack()
-        }
-        else
-        {   // move to another location with an obstacle between
+        } else {   // move to another location with an obstacle between
             println("Command: $name move to ${destination.name} and back.")
             println("And jump over the ${realWorldObject.name}.")
             say("I am starting at the ${location.name}.")
@@ -62,39 +61,36 @@ data class Dog(
         say("I am now at ${destination.name}.")
     }
 
-    private fun getSuccessorLocation (location: ILocation) : ILocation
-    {
-        return locationHistory[locationHistory.lastIndexOf(location)-1]
+    private fun getSuccessorLocation(location: ILocation): ILocation {
+        return locationHistory[locationHistory.lastIndexOf(location) - 1]
     }
 
-    override fun jumpOver(realWorldObject: RealWorldObject) :Boolean {
+    override fun jumpOver(realWorldObject: RealWorldObject): Boolean {
         val jumpable = this.canJumpOver(realWorldObject)
         if (jumpable) {
             this.say("Jumping over ${realWorldObject.name} ... whee. :)")
-        }
-        else {
+        } else {
             this.say("I am to small to jump over ${realWorldObject.name}. :(")
         }
         return jumpable
     }
 
-    private fun canJumpOver (realWorldObject: RealWorldObject): Boolean =
+    private fun canJumpOver(realWorldObject: RealWorldObject): Boolean =
         (realWorldObject.height <= this.height && realWorldObject.length <= this.height)
 
-    private fun printLocationHistory()
-    {
+    private fun printLocationHistory() {
         println()
         print("LocationHistory: ")
 
         if (locationHistory.size == 0) {
             print(" empty ")
             println()
-        }
-        else {
+        } else {
             locationHistory.forEachIndexed { i, e -> print("[$i] = ${e.name} ") }
         }
         println()
     }
 
-    override fun toString(): String ="${this.javaClass.name}(${::name.name}= ${this.name}, ${::health.name} =${this.health}, ${::location.name}=${this.location.name}, ${::height.name}= ${this.height})"
+    override fun toString(): String =
+        "${this.javaClass.name}(${::name.name}= ${this.name}, ${::health.name} =${this.health}, ${::location.name}=${this.location.name}, ${::height.name}= ${this.height})"
 }
