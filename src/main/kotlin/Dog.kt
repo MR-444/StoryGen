@@ -15,35 +15,56 @@ data class Dog(
     fun giveLastVisitedLocation(): ILocation = locationHistory.last
 
     override fun moveToAndBack(destination: ILocation, realWorldObject: RealWorldObject?) {
-        if (realWorldObject == null ) {
-            // just move to another location
-            println("Command: ${name} move to ${destination.name} and back.")
 
-            say("I am at the ${location.name}.")
-            //remember the actual location
+        println()
+        println("Command: ${name} move to ${destination.name} and back.")
+        say("I am starting at the ${location.name}.")
+
+        if (realWorldObject == null ) {
+
+            printLocationHistory()
+
+            // just move to another location
+            //remember the actual starting location
             locationHistory.add(location)
 
-            // todo apply location dependent status changes -- if any exists
             say("I am running to the ${destination.name}.")
 
-            this.location= destination
-            say("I am at ${this.location.name}.")
-            //remember the destination location now the old one...
-            locationHistory.push(destination)
+            location= destination
+            locationHistory.add(destination)
+            say("I am now at ${destination.name}.")
 
-            say("I am running back to the ${locationHistory.pop()?.name}.")
+            printLocationHistory()
+
+            // run back
+            // add the new destination which was the start.
+            say("I am running back to the ${getSuccessorLocation(this.location).name}.")
+            locationHistory.add(getSuccessorLocation(this.location))
+            location = getSuccessorLocation(this.location)
+
+            printLocationHistory()
+
+            this.say("I am at ${location.name} and have visited the ${getSuccessorLocation(this.location).name}.")
         }
         else
         {   // move to another location with an obstacle between
-            println()
-            println("Command: ${this.name} move to ${destination.name} and back. And jump over the ${realWorldObject.name}.")
+            println("And jump over the ${realWorldObject.name}.")
             if (jumpOver(realWorldObject)) {
-
-                say("I am running back to the ${locationHistory.pop()?.name}.")
-                //remember the destination location now the old one...
-                locationHistory.push(destination)
+                rememberDestination(destination)
             }
         }
+    }
+
+    private fun getSuccessorLocation (location: ILocation) : ILocation
+    {
+        println("Returned Element: " + locationHistory[locationHistory.lastIndexOf(location)-1])
+        return locationHistory[locationHistory.lastIndexOf(location)-1]
+    }
+
+    private fun rememberDestination(destination: ILocation) {
+        //remember the destination location now the old one...
+        say("I am running back to the ${locationHistory[locationHistory.size - 1].name}.")
+        locationHistory.add(destination)
     }
 
     override fun jumpOver(realWorldObject: RealWorldObject) :Boolean {
@@ -59,6 +80,21 @@ data class Dog(
 
     private fun canJumpOver (realWorldObject: RealWorldObject): Boolean =
         (realWorldObject.height <= this.height && realWorldObject.length <= this.height)
+
+    private fun printLocationHistory()
+    {
+        println()
+        print("LocationHistory: ")
+
+        if (locationHistory.size == 0) {
+            print(" empty ")
+            println()
+        }
+        else {
+            locationHistory.forEachIndexed { i, e -> print("[$i] = ${e.name} ") }
+        }
+        println()
+    }
 
     override fun toString(): String ="${this.javaClass.name}(${::name.name}= ${this.name}, ${::health.name} =${this.health}, ${::location.name}=${this.location.name}, ${::height.name}= ${this.height})"
 }

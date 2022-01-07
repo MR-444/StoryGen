@@ -26,8 +26,6 @@ fun main() {
     println()
     fido.moveToAndBack(pond, null)
 
-    fido.say("I am at ${fido.location.name} and have visited the ${fido.giveLastVisitedLocation().name}")
-
     // let's travel the dog between 2 locations
     // and put an obstacle between the locations.
     val smallBox = RealWorldObject(name = "small box", height = 1, width = 1, length = 1)
