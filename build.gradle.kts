@@ -14,13 +14,15 @@ repositories {
 }
 
 dependencies {
-    implementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    testImplementation("io.kotest:kotest-runner-junit5:5.0.3") // for kotest framework
+    testImplementation("io.kotest:kotest-assertions-core:5.0.3") // for kotest core jvm assertions
+    testImplementation("io.kotest:kotest-property:5.0.3") // for kotest property test
 
     testImplementation(kotlin("test"))
 }
 
-tasks.test {
-    useJUnit()
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 tasks.withType<KotlinCompile>() {

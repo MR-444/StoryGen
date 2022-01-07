@@ -1,42 +1,10 @@
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.data.headers
+import io.kotest.data.row
+import io.kotest.data.table
+import io.kotest.matchers.shouldBe
 
 
 internal class MonsterTest {
 
-    @Test
-    fun getLocationHistory() {
-    }
-
-    @Test
-    fun healthToLiteral() {
-    }
-
-    @Test
-    fun moveToAndBack() {
-    }
-
-    @Test
-    fun jumpOver() {
-    }
-
-    @Test
-    fun getName() {
-    }
-
-    @Test
-    fun getHealth() {
-    }
-
-    @Test
-    fun setHealth() {
-    }
-
-    @Test
-    fun getLocation() {
-    }
-
-    @Test
-    fun setLocation() {
-    }
 }
