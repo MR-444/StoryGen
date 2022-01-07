@@ -46,7 +46,7 @@ data class Dog(
         location = getSuccessorLocation(location)
         locationHistory.add(location)
 
-        this.say("I am at ${location.name} and have visited the ${getSuccessorLocation(location).name}.")
+        say("I am at ${location.name} and have visited the ${getSuccessorLocation(location).name}.")
     }
 
     private fun moveTo(destination: ILocation) {
@@ -66,17 +66,17 @@ data class Dog(
     }
 
     override fun jumpOver(realWorldObject: RealWorldObject): Boolean {
-        val jumpable = this.canJumpOver(realWorldObject)
+        val jumpable = canJumpOver(realWorldObject)
         if (jumpable) {
-            this.say("Jumping over ${realWorldObject.name} ... whee. :)")
+            say("Jumping over ${realWorldObject.name} ... whee. :)")
         } else {
-            this.say("I am to small to jump over ${realWorldObject.name}. :(")
+            say("I am to small to jump over ${realWorldObject.name}. :(")
         }
         return jumpable
     }
 
     private fun canJumpOver(realWorldObject: RealWorldObject): Boolean =
-        (realWorldObject.height <= this.height && realWorldObject.length <= this.height)
+        (realWorldObject.height <= height && realWorldObject.length <= height)
 
     fun printLocationHistory() {
         println()
@@ -92,5 +92,5 @@ data class Dog(
     }
 
     override fun toString(): String =
-        "${this.javaClass.name}(${::name.name}= ${this.name}, ${::health.name} =${this.health}, ${::location.name}=${this.location.name}, ${::height.name}= ${this.height})"
+        "${javaClass.name}(${::name.name}= ${name}, ${::health.name} =${health}, ${::location.name}=${location.name}, ${::height.name}= ${height})"
 }
