@@ -4,7 +4,7 @@ import io.kotest.matchers.shouldBe
 class MonsterTest : FunSpec({
 
     // initialize
-    val playGround = LocationFactory("PlayGround")
+    val playGround = LocationFactory().create(Location.PlayGround)
 
     val fido = Dog(
         name = "Fido",

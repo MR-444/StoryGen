@@ -1,12 +1,9 @@
-class LocationFactory (mainFeature: String) : ILocation {
-
-    override var name = mainFeature
-
-    fun create(name: String): ILocation {
-        return when (name) {
-            "PlayGround" -> PlayGround(name)
-            "Pond" -> Pond(name)
-            else -> throw Exception("I don't know how to deal with $name.")
+class LocationFactory() {
+    fun create(mainFeature: Location): ILocation {
+        return when (mainFeature) {
+            Location.PlayGround -> PlayGround()
+            Location.Pond -> Pond()
+            else -> throw Exception("I don't know how to deal with ${this}")
         }
     }
 }

@@ -1,3 +1,3 @@
-interface ILocation{
+interface ILocation {
     var name: String
 }

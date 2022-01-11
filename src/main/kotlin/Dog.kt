@@ -91,6 +91,14 @@ data class Dog(
         println()
     }
 
+    override fun backTrack() {
+        // backwards
+        val it = locationHistory.descendingIterator()
+        while (it.hasNext()) {
+            println(it.next().name)
+        }
+    }
+
     override fun toString(): String =
-        "${javaClass.name}(${::name.name}= ${name}, ${::health.name} =${health}, ${::location.name}=${location.name}, ${::height.name}= ${height})"
+        "${javaClass.name}(${::name.name}=${name}, ${::health.name}=${health}, ${::location.name}=${location.name}, ${::height.name}=${height})"
 }

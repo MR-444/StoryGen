@@ -1,7 +1,8 @@
 fun main() {
     // instantiate objects
-    val playGround = LocationFactory("PlayGround")
-    val pond = LocationFactory("Pond")
+    val playGround = LocationFactory().create(Location.PlayGround)
+    val pond = LocationFactory().create(Location.Pond)
+
     val fido = Dog(
         name = "Fido",
         health = 100,
@@ -39,6 +40,9 @@ fun main() {
     //show travel history
     fido.say("I ran around a lot: ")
     fido.printLocationHistory()
+
+    fido.say("I backtract the whole locations now")
+    fido.backTrack()
 }
 
 

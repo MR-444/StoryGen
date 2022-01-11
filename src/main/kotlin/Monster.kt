@@ -12,7 +12,7 @@ abstract class Monster (open val name: String,
             in 50..74 -> Health.HeavilyInjured.text
             in 25..49 -> Health.Crippled.text
             in 1..24 -> Health.NearlyDead.text
-            else -> Health.Dead.text
+        else -> Health.Dead.text
     }
 
     // move actions
@@ -22,5 +22,10 @@ abstract class Monster (open val name: String,
      * Jump over an object
      *
      */
-    abstract fun jumpOver(realWorldObject: RealWorldObject):Boolean
+    abstract fun jumpOver(realWorldObject: RealWorldObject): Boolean
+
+    /**
+     * Follow the complete locations (in locationHistory)
+     */
+    abstract fun backTrack()
 }

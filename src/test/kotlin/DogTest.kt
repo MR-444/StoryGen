@@ -2,10 +2,9 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
 class DogTest : FunSpec({
-
     // initialize
-    val playGround = LocationFactory("PlayGround")
-    val pond = LocationFactory("Pond")
+    val playGround = LocationFactory().create(Location.PlayGround)
+    val pond = LocationFactory().create(Location.Pond)
 
     val fido = Dog(
         name = "Fido",
