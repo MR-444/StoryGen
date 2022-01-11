@@ -30,6 +30,7 @@ class DogTest : FunSpec({
     test("printLocationHistory() should ??") {
     }
 
-    test("toString() should ??") {
+    test("toString() should correct") {
+        fido.toString() shouldBe "Dog(name=Fido, health=100, location=PlayGround, height=21.0)"
     }
 })

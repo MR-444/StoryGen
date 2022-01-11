@@ -1,1 +1,5 @@
-class PlayGround(override var name: String = "PlayGround") : ILocation
+class PlayGround(
+    override var name: String = "PlayGround",
+    override var description: String? = "A small playground.",
+    override val containingObjects: Set<RealWorldObject>? = null
+) : ILocation

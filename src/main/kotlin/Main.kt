@@ -41,7 +41,7 @@ fun main() {
     fido.say("I ran around a lot: ")
     fido.printLocationHistory()
 
-    fido.say("I backtract the whole locations now")
+    fido.say("I am tracking the whole locations back now.")
     fido.backTrack()
 }
 

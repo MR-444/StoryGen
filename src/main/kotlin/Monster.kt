@@ -28,4 +28,8 @@ abstract class Monster (open val name: String,
      * Follow the complete locations (in locationHistory)
      */
     abstract fun backTrack()
+
+    fun doSomething() {
+        println("A")
+    }
 }

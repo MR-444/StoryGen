@@ -3,11 +3,8 @@ class LocationFactory() {
         return when (mainFeature) {
             Location.PlayGround -> PlayGround()
             Location.Pond -> Pond()
-            else -> throw Exception("I don't know how to deal with ${this}")
         }
     }
 }
 
-
-
-// https://chercher.tech/kotlin/factory-design-pattern-kotlin
+// see also: https://dev.to/jimfilippou/using-the-factory-design-pattern-with-kotlin-5bh5

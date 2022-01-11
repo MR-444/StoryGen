@@ -92,10 +92,13 @@ data class Dog(
     }
 
     override fun backTrack() {
+        println("Backtracking over number of locations: " + locationHistory.size)
         // backwards
         val it = locationHistory.descendingIterator()
         while (it.hasNext()) {
-            println(it.next().name)
+            val n = it.next()
+            println(n.name)
+            println(n.description)
         }
     }
 
