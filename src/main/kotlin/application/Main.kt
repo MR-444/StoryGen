@@ -1,7 +1,7 @@
-import domain.RealWorldObject.RealWorldObject
 import domain.livingThing.Dog
 import domain.location.Location
 import domain.location.LocationFactory
+import domain.realWorldObject.RealWorldObject
 
 fun main() {
     // instantiate objects

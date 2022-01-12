@@ -1,8 +1,8 @@
 package domain.livingThing
 
 import domain.location.ILocation
-import domain.RealWorldObject.RealWorldObject
-import java.util.LinkedList
+import domain.realWorldObject.RealWorldObject
+import java.util.*
 
 abstract class Monster(
     open val name: String,

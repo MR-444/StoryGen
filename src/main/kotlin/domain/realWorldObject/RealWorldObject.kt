@@ -1,4 +1,4 @@
-package domain.RealWorldObject
+package domain.realWorldObject
 
 class RealWorldObject(
     val name: String,

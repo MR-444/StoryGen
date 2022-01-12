@@ -1,6 +1,6 @@
 package domain.location
 
-import domain.RealWorldObject.RealWorldObject
+import domain.realWorldObject.RealWorldObject
 
 interface ILocation {
     var name: String

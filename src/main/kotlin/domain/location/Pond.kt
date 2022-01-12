@@ -1,6 +1,6 @@
 package domain.location
 
-import domain.RealWorldObject.RealWorldObject
+import domain.realWorldObject.RealWorldObject
 
 class Pond(
     override var name: String = "Pond",
