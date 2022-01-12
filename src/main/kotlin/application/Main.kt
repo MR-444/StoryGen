@@ -1,3 +1,8 @@
+import domain.RealWorldObject.RealWorldObject
+import domain.livingThing.Dog
+import domain.location.Location
+import domain.location.LocationFactory
+
 fun main() {
     // instantiate objects
     val playGround = LocationFactory().create(Location.PlayGround)
@@ -11,11 +16,11 @@ fun main() {
     )
 
     // story begins.
-    println("All begins with the ${fido.javaClass.name}...")
+    println("All begins with the ${fido.javaClass.simpleName}...")
 
     println(fido)
 
-    println("The ${fido.javaClass.name} called ${fido.name} makes ${fido.bark}.")
+    println("The ${fido.javaClass.simpleName} called ${fido.name} makes ${fido.bark}.")
     println("And is ${fido.healthToLiteral()}.")
 
     // move the dog around in one location.

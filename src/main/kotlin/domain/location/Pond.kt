@@ -1,3 +1,7 @@
+package domain.location
+
+import domain.RealWorldObject.RealWorldObject
+
 class Pond(
     override var name: String = "Pond",
     override var description: String? = "A lovely small pond.",

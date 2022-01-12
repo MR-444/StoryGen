@@ -1,3 +1,6 @@
+import domain.livingThing.Dog
+import domain.location.Location
+import domain.location.LocationFactory
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
@@ -31,6 +34,6 @@ class DogTest : FunSpec({
     }
 
     test("toString() should correct") {
-        fido.toString() shouldBe "Dog(name=Fido, health=100, location=PlayGround, height=21.0)"
+        fido.toString() shouldBe "domain.livingThing.Dog(name=Fido, health=100, location=domain.location.PlayGround, height=21.0)"
     }
 })

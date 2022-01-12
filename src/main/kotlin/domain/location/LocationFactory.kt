@@ -1,3 +1,5 @@
+package domain.location
+
 class LocationFactory() {
     fun create(mainFeature: Location): ILocation {
         return when (mainFeature) {

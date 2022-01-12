@@ -1,3 +1,5 @@
+package domain.RealWorldObject
+
 class RealWorldObject(
     val name: String,
     var description: String = "Nice",

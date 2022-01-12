@@ -1,3 +1,7 @@
+package domain.livingThing
+
+import domain.location.ILocation
+import domain.RealWorldObject.RealWorldObject
 import java.util.LinkedList
 
 data class Dog(

@@ -1,3 +1,6 @@
+import domain.livingThing.Dog
+import domain.location.Location
+import domain.location.LocationFactory
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
