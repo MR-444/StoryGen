@@ -1,0 +1,26 @@
+Todos:
+- Make a memory (identifier is the name of a location (or object))
+  = > so you can say <subject> go to <location>
+
+- Sophisticate the memory (Use H2 or asami)
+
+- Say <subject> go to <direction> when visiting a new unknown location give a name to it in dependence to the attributes
+  of the location.
+
+
+- let have locations objects Working on.
+
+- command: look at (location/object)
+
+- more things which can happen when moving around.
+  - random encounters
+    - interaction with encounters in both directions.
+- implement the jumpable objects as real object in a location.
+
+- create 3 objects,
+- randomize their occurrence in a location.
+
+
+- think about how you want to represent a large number of objects like livingThings or realwordobjects.
+  to build 1000 classes for 1000 animals would be a bad idea?
+  (put only the description in a config file? (db?)

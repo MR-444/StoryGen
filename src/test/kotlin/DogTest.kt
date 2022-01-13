@@ -34,6 +34,6 @@ class DogTest : FunSpec({
     }
 
     test("toString() should correct") {
-        fido.toString() shouldBe "domain.livingThing.Dog(name=Fido, health=100, location=domain.location.PlayGround, height=21.0)"
+        fido.toString() shouldBe "domain.livingThing.Dog(name=Fido, health=100, location=PlayGround, height=21.0)"
     }
 })

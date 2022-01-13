@@ -1,9 +1,9 @@
 package domain.location
 
-import domain.realWorldObject.RealWorldObject
+import domain.realWorldObject.IRealWorldObject
 
 class PlayGround(
     override var name: String = "PlayGround",
     override var description: String? = "A small playground.",
-    override val containingObjects: Set<RealWorldObject>? = null
+    override val containingObjects: Set<IRealWorldObject>? = null,
 ) : ILocation

@@ -2,6 +2,7 @@ import domain.livingThing.Dog
 import domain.location.Location
 import domain.location.LocationFactory
 import domain.realWorldObject.RealWorldObject
+import domain.realWorldObject.RealWorldObjectFactory
 
 fun main() {
     // instantiate objects
@@ -34,13 +35,13 @@ fun main() {
 
     // let's travel the dog between 2 locations
     // and put an obstacle between the locations.
-    val smallBox = RealWorldObject(name = "small box", height = 1, width = 1, length = 1)
+    val smallBox = RealWorldObjectFactory().create(RealWorldObject.SmallBox)
     fido.moveToAndBack(pond, smallBox)
 
     // let's travel the dog between 2 locations
     // and put an obstacle between the locations which is too big to jump over.
-    val bigBox = RealWorldObject(name = "big box", height = 51, width = 1, length = 1)
-    fido.moveToAndBack(pond, bigBox)
+    val largeBox = RealWorldObjectFactory().create(RealWorldObject.LargeBox)
+    fido.moveToAndBack(pond, largeBox)
 
     //show travel history
     fido.say("I ran around a lot: ")

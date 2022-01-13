@@ -1,8 +1,8 @@
 package domain.location
 
 class LocationFactory() {
-    fun create(mainFeature: Location): ILocation {
-        return when (mainFeature) {
+    fun create(location: Location): ILocation {
+        return when (location) {
             Location.PlayGround -> PlayGround()
             Location.Pond -> Pond()
         }

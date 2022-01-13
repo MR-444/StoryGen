@@ -1,7 +1,7 @@
 package domain.livingThing
 
 import domain.location.ILocation
-import domain.realWorldObject.RealWorldObject
+import domain.realWorldObject.IRealWorldObject
 import java.util.*
 
 abstract class Monster(
@@ -22,20 +22,16 @@ abstract class Monster(
     }
 
     // move actions
-    abstract fun moveToAndBack(destination: ILocation, realWorldObject: RealWorldObject?)
+    abstract fun moveToAndBack(destination: ILocation, realWorldObject: IRealWorldObject?)
 
     /**
      * Jump over an object
      *
      */
-    abstract fun jumpOver(realWorldObject: RealWorldObject): Boolean
+    abstract fun jumpOver(realWorldObject: IRealWorldObject): Boolean
 
     /**
      * Follow the complete locations (in locationHistory)
      */
     abstract fun backTrack()
-
-    fun doSomething() {
-        println("A")
-    }
 }

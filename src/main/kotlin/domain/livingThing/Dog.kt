@@ -1,7 +1,7 @@
 package domain.livingThing
 
 import domain.location.ILocation
-import domain.realWorldObject.RealWorldObject
+import domain.realWorldObject.IRealWorldObject
 import java.util.*
 
 data class Dog(
@@ -17,7 +17,7 @@ data class Dog(
 
     fun say(s: String) = println(s)
 
-    override fun moveToAndBack(destination: ILocation, realWorldObject: RealWorldObject?) {
+    override fun moveToAndBack(destination: ILocation, realWorldObject: IRealWorldObject?) {
 
         println()
 
@@ -69,7 +69,7 @@ data class Dog(
         return locationHistory[locationHistory.lastIndexOf(location) - 1]
     }
 
-    override fun jumpOver(realWorldObject: RealWorldObject): Boolean {
+    override fun jumpOver(realWorldObject: IRealWorldObject): Boolean {
         val jumpable = canJumpOver(realWorldObject)
         if (jumpable) {
             say("Jumping over ${realWorldObject.name} ... whee. :)")
@@ -79,7 +79,7 @@ data class Dog(
         return jumpable
     }
 
-    private fun canJumpOver(realWorldObject: RealWorldObject): Boolean =
+    private fun canJumpOver(realWorldObject: IRealWorldObject): Boolean =
         (realWorldObject.height <= height && realWorldObject.length <= height)
 
     fun printLocationHistory() {
