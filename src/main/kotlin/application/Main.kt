@@ -28,6 +28,9 @@ fun main() {
     println()
     println("${fido.name} runs happily around in the ${playGround.name}.")
 
+    // look around
+    fido.lookAround()
+
     // =======================================================================
     // let's travel the dog between 2 locations
     println()
@@ -44,9 +47,11 @@ fun main() {
     fido.moveToAndBack(pond, largeBox)
 
     //show travel history
+    println()
     fido.say("I ran around a lot: ")
     fido.printLocationHistory()
 
+    println()
     fido.say("I am tracking the whole locations back now.")
     fido.backTrack()
 }

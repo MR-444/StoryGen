@@ -17,6 +17,18 @@ data class Dog(
 
     fun say(s: String) = println(s)
 
+    // awareness actions
+    fun lookAt(realWorldObject: IRealWorldObject) {
+        say("${realWorldObject.description}")
+    }
+
+    fun lookAround() {
+        say("I see ")
+        this.location.containingObjects?.forEach { print(it.name + ", ") }
+    }
+
+    // moving actions
+
     override fun moveToAndBack(destination: ILocation, realWorldObject: IRealWorldObject?) {
 
         println()
@@ -83,7 +95,6 @@ data class Dog(
         (realWorldObject.height <= height && realWorldObject.length <= height)
 
     fun printLocationHistory() {
-        println()
         print("LocationHistory: ")
 
         if (locationHistory.size == 0) {
@@ -96,7 +107,7 @@ data class Dog(
     }
 
     override fun backTrack() {
-        println("Backtracking over number of locations: " + locationHistory.size)
+        println("Backtracking over ${locationHistory.size} locations: ")
         // backwards
         val it = locationHistory.descendingIterator()
         while (it.hasNext()) {

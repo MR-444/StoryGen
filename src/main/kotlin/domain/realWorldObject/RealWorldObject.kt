@@ -1,5 +1,5 @@
 package domain.realWorldObject
 
 enum class RealWorldObject {
-    SmallBox, LargeBox, WaterLilies
+    SandBox, SmallBox, LargeBox, WaterLilies
 }
