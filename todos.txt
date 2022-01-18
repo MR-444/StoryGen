@@ -2,7 +2,8 @@ Todos:
 - Make a memory (identifier is the name of a location (or object))
   = > so you can say <subject> go to <location>
 
-- Sophisticate the memory (Use H2 or asami)
+- Sophisticate the memory (Use H2 or asami (https://github.com/threatgrid/asami) )
+  how to integregate h2: https://stackoverflow.com/questions/48357523/how-to-use-kotlin-with-h2-and-sqlite-in-intellij
 
 - Say <subject> go to <direction> when visiting a new unknown location give a name to it in dependence to the attributes
   of the location.

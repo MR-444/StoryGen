@@ -1,10 +1,19 @@
+import application.WorldInitialization
 import domain.livingThing.Dog
 import domain.location.Location
 import domain.location.LocationFactory
 import domain.realWorldObject.RealWorldObject
 import domain.realWorldObject.RealWorldObjectFactory
 
+
 fun main() {
+
+    val worldInitialization: WorldInitialization = WorldInitialization()
+
+    worldInitialization.init()
+
+    return
+
     // instantiate objects
     val playGround = LocationFactory().create(Location.PlayGround)
     val pond = LocationFactory().create(Location.Pond)
