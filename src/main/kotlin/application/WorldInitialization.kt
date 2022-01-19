@@ -1,10 +1,10 @@
 package application
 
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.dao.id.UUIDTable
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+
+//import org.slf4j.LoggerFactory
 
 /**
  * Initialize the World:
@@ -13,30 +13,46 @@ import org.jetbrains.exposed.sql.transactions.transaction
  * 2. RealWorldObjects
  * 3. Living Beings
  *
- *
- *
  */
 
 class WorldInitialization {
 
     fun init() {
-        Database.connect("jdbc:h2:mem:test", driver = "org.h2.Driver")
+        //https://stackoverflow.com/questions/5763747/h2-in-memory-database-table-not-found
+        Database.connect("jdbc:h2:./baseObjects.db;DB_CLOSE_DELAY=-1", driver = "org.h2.Driver")
 
         transaction {
+            addLogger(StdOutSqlLogger)
 
-            val stPeteId = Cities.insert {
-                it[name] = "St. Petersburg"
+            SchemaUtils.createDatabase("StoryGen")
+            SchemaUtils.create(WorldObjects)
+
+            WorldObjects.insert {
+                it[name] = "small box"
+                it[description] = "This is a small box."
+                it[height] = 1
+                it[width] = 1
+                it[length] = 1
+                it[weight] = 1
             }
 
-            println("Cities: ${Cities.selectAll()}")
+            WorldObjects.insert {
+                it[name] = "large box"
+                it[description] = "This is a really large and heavy looking box."
+                it[height] = 51
+                it[width] = 1
+                it[length] = 1
+                it[weight] = 50
+            }
         }
-
     }
 
-    object Cities : Table() {
-        val id = integer("id").autoIncrement()
+    object WorldObjects : UUIDTable() {
         val name = varchar("name", 50)
+        var description = varchar("description", 200)
+        var height = integer("height")
+        var width = integer("width").nullable()
+        var length = integer("length").nullable()
+        var weight = integer("weight").nullable()
     }
-
-    data class City(val id: Int, val name: String)
 }
