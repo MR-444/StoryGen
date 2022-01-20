@@ -8,9 +8,9 @@ import domain.realWorldObject.RealWorldObjectFactory
 
 fun main() {
 
-    val worldInitialization: WorldInitialization = WorldInitialization()
+    val worldInitialization = WorldInitialization()
 
-    worldInitialization.init()
+    worldInitialization.create()
 
 
     return
