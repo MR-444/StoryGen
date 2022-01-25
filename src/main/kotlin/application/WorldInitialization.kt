@@ -17,6 +17,9 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class WorldInitialization {
 
+    /**
+     * Create the data in the database.
+     */
     fun create() {
         //https://stackoverflow.com/questions/5763747/h2-in-memory-database-table-not-found
         Database.connect("jdbc:h2:./baseObjects;DB_CLOSE_DELAY=-1", driver = "org.h2.Driver")
@@ -78,17 +81,17 @@ class WorldInitialization {
         }
     }
 
-    // load all data structures into memorey.
+    // load all data structures into memory.
     fun init() {
 
     }
 
     //
     // The tables should contain only flat data!
-    // while thinking i was designing the whole relations and i do not want it
-    // the building and association process should occur in the OO world.
+    // while thinking, I began to design the whole relations.
+    // But the building and association process should occur in the OO world not in the ERM world.
     //
-    // how i persist all the relations: think later about it, if you need it.
+    // Todo: How I persist all the relations: think later about it, if you need it.
     //
 
     object WorldObjects : UUIDTable() {
