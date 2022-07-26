@@ -27,3 +27,9 @@ done
   of the location.
 - let have locations objects Working on.
 - command: look at (location/object)
+
+
+
+-Build a object builder
+-read the objects from the persistence layer created by the builder.
+

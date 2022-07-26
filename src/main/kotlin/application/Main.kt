@@ -12,9 +12,6 @@ fun main() {
 
     worldInitialization.create()
 
-
-    return
-
     // instantiate objects
     val playGround = LocationFactory().create(Location.PlayGround)
     val pond = LocationFactory().create(Location.Pond)
