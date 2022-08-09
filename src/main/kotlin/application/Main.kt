@@ -8,9 +8,9 @@ import domain.realWorldObject.RealWorldObjectFactory
 
 fun main() {
 
-    val worldInitialization = WorldInitialization()
-
-    worldInitialization.create()
+    WorldInitialization().also {
+        it.create()
+    }
 
     // instantiate objects
     val playGround = LocationFactory().create(Location.PlayGround)
