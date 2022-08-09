@@ -1,4 +1,5 @@
-import application.WorldInitialization
+package application
+
 import domain.livingThing.Dog
 import domain.location.Location
 import domain.location.LocationFactory
