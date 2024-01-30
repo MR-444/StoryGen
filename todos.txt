@@ -32,4 +32,44 @@ done
 
 -Build a object builder
 -read the objects from the persistence layer created by the builder.
+- interface InteractionBehavior {
+      fun interactWithEnvironment(): String
+  }
+
+  class BarkInteractionBehavior : InteractionBehavior {
+      override fun interactWithEnvironment(): String {
+          return "The dog barks at the environment."
+      }
+  }
+
+  class GrowlInteractionBehavior : InteractionBehavior {
+      override fun interactWithEnvironment(): String {
+          return "The monster growls at the environment."
+      }
+  }
+
+  abstract class Monster(
+      open val name: String,
+      open var health: Int,
+      open var location: ILocation
+  ) : LandDweller {
+      abstract var interactionBehavior: InteractionBehavior
+
+      fun interact() {
+          println(interactionBehavior.interactWithEnvironment())
+      }
+
+      // ... existing Monster methods ...
+  }
+
+  class Dog(
+      override val name: String,
+      override var health: Int,
+      override var location: ILocation
+  ) : Monster(name, health, location) {
+      override var interactionBehavior: InteractionBehavior = BarkInteractionBehavior()
+
+      // ... existing Dog methods ...
+  }
+
 
