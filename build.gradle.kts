@@ -22,7 +22,8 @@ dependencies {
     implementation("org.jetbrains.exposed", "exposed-jdbc", "0.37.3")
 
     implementation("com.h2database:h2:2.1.210") // H2 Database
-    //implementation("org.slf4j:slf4j-api:1.7.33") // logger
+    implementation("org.slf4j:slf4j-api:1.7.33") // logger
+    implementation("ch.qos.logback:logback-classic:1.2.3") // logback dependency
     //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxCoRoutinesVersion")
 
     testImplementation("io.kotest:kotest-runner-junit5:5.0.3") // for kotest framework
