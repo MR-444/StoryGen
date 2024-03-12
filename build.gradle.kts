@@ -17,18 +17,18 @@ repositories {
 
 dependencies {
 
-    implementation("org.jetbrains.exposed", "exposed-core", "0.37.3")
-    implementation("org.jetbrains.exposed", "exposed-dao", "0.37.3")
-    implementation("org.jetbrains.exposed", "exposed-jdbc", "0.37.3")
+    implementation("org.jetbrains.exposed", "exposed-core", "0.48.0")
+    implementation("org.jetbrains.exposed", "exposed-dao", "0.48.0")
+    implementation("org.jetbrains.exposed", "exposed-jdbc", "0.48.0")
 
-    implementation("com.h2database:h2:2.1.210") // H2 Database
-    implementation("org.slf4j:slf4j-api:1.7.33") // logger
+    implementation("com.h2database:h2:2.2.224") // H2 Database
+    implementation("org.slf4j:slf4j-api:2.0.12") // logger
     implementation("ch.qos.logback:logback-classic:1.5.3") // logback dependency
     //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxCoRoutinesVersion")
 
-    testImplementation("io.kotest:kotest-runner-junit5:5.0.3") // for kotest framework
-    testImplementation("io.kotest:kotest-assertions-core:5.0.3") // for kotest core jvm assertions
-    testImplementation("io.kotest:kotest-property:5.0.3") // for kotest property test
+    testImplementation("io.kotest:kotest-runner-junit5:5.8.1") // for kotest framework
+    testImplementation("io.kotest:kotest-assertions-core:5.8.1") // for kotest core jvm assertions
+    testImplementation("io.kotest:kotest-property:5.8.1") // for kotest property test
 
     testImplementation(kotlin("test"))
 }
@@ -38,7 +38,7 @@ tasks.withType<Test> {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 
 tasks.withType<Test> {
