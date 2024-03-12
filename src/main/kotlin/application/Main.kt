@@ -3,8 +3,9 @@ package application
 import domain.livingThing.Dog
 import domain.location.Location
 import domain.location.LocationFactory
+import domain.realWorldObject.LargeBoxFactory
 import domain.realWorldObject.RealWorldObject
-import domain.realWorldObject.RealWorldObjectFactory
+import domain.realWorldObject.SmallBoxFactory
 
 
 fun main() {
@@ -46,12 +47,13 @@ fun main() {
 
     // let's travel the dog between 2 locations
     // and put an obstacle between the locations.
-    val smallBox = RealWorldObjectFactory().create(RealWorldObject.SmallBox)
+    val smallBox = SmallBoxFactory().create()
     fido.moveToAndBack(pond, smallBox)
 
     // let's travel the dog between 2 locations
     // and put an obstacle between the locations which is too big to jump over.
-    val largeBox = RealWorldObjectFactory().create(RealWorldObject.LargeBox)
+    val largeBox = LargeBoxFactory().create()
+
     fido.moveToAndBack(pond, largeBox)
 
     //show travel history

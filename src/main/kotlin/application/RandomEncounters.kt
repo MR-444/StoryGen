@@ -14,7 +14,6 @@ import domain.location.Location
 import domain.location.LocationFactory
 import domain.realWorldObject.IRealWorldObject
 import domain.realWorldObject.RealWorldObject
-import domain.realWorldObject.RealWorldObjectFactory
 import kotlin.random.Random
 
 // Define an interface for an Encounter
@@ -40,29 +39,16 @@ class RealWorldObjectEncounter(private val realWorldObject: IRealWorldObject) : 
 }
 
 // This class manages the random encounters
-class RandomEncounters(private val realWorldObjectFactory: RealWorldObjectFactory) {
+class RandomEncounters {
+    private val locationFactory = LocationFactory()
 
-    private val randomEncounters: List<Encounter> = RealWorldObject.values().map {
-        RealWorldObjectEncounter(realWorldObjectFactory.create(it))
-    } + listOf(
-        // take a dog because there are no generic monsters yet.
-        MonsterEncounter(Dog("Fido", 100, LocationFactory().create(Location.PlayGround), 21.0)
-        // TODO: add more monsters
-        )
-    )
-
-    private fun getRandomEncounter(): Encounter {
-        val randomIndex = Random.nextInt(randomEncounters.size)
-        return randomEncounters[randomIndex]
-    }
-
-    fun interactWithEncounter(encounter: Encounter) {
-        println(encounter.interact())
-    }
-
-    fun interactWithEnvironment() {
-        val encounter = getRandomEncounter()
-        println("While exploring, " + encounter.interact())
+    // Randomly generate an encounter
+    fun generateEncounter(): Encounter {
+        val encounterType = Random.nextInt(0, 2)
+        return when (encounterType) {
+            0 -> MonsterEncounter(Dog("Fido", 100, locationFactory.create(Location.PlayGround), 21.0))
+            else -> RealWorldObjectEncounter(RealWorldObject("Tree", "A tall tree", 10, 10, 10, 10))
+        }
     }
 }
 
