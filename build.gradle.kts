@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinxCoRoutinesVersion = "1.6.0"
+val kotlinxCoRoutinesVersion = "1.9.0"
 
 plugins {
-    kotlin("jvm") version "1.6.0"
+    kotlin("jvm") version "1.9.0"
     application
 }
 
