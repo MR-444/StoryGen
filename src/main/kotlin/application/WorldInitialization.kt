@@ -128,7 +128,7 @@ class WorldInitialization {
         }
     }
 
-    object WorldObjects : UUIDTable() {
+    data object WorldObjects : UUIDTable() {
         val name = varchar("name", 50)
         var description = varchar("description", 200)
         var height = double("height")
@@ -139,7 +139,7 @@ class WorldInitialization {
         val locationId = reference("location_id", Locations).nullable()
     }
 
-    object LivingThings : UUIDTable() {
+    data object LivingThings : UUIDTable() {
         val name = varchar("name", 50)
         val type = varchar("type", 50)
         var description = varchar("description", 200)
@@ -149,12 +149,12 @@ class WorldInitialization {
         val locationId = reference("location_id", Locations).nullable()
     }
 
-    object Locations : UUIDTable() {
+    data object Locations : UUIDTable() {
         val name = varchar("name", 50)
         var description = varchar("description", 200)
     }
 
-    object Exits : UUIDTable() {
+    data object Exits : UUIDTable() {
         val fromLocation = reference("from_location_id", Locations)
         val toLocation = reference("to_location_id", Locations)
         val direction = varchar("direction", 10) // e.g., "NORTH", "SOUTH"

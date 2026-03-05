@@ -7,14 +7,14 @@ package application
 import domain.livingThing.Character
 import domain.realWorldObject.WorldObject
 
-// Define an interface for an Encounter
-interface Encounter {
+// Define a sealed interface for an Encounter
+sealed interface Encounter {
     val name: String
     fun interact(): String
 }
 
 // Concrete implementation for Character encounter
-class CharacterEncounter(private val character: Character) : Encounter {
+data class CharacterEncounter(private val character: Character) : Encounter {
     override val name: String
         get() = character.name
 
@@ -22,7 +22,7 @@ class CharacterEncounter(private val character: Character) : Encounter {
 }
 
 // Concrete implementation for RealWorldObject encounter
-class RealWorldObjectEncounter(private val worldObject: WorldObject) : Encounter {
+data class RealWorldObjectEncounter(private val worldObject: WorldObject) : Encounter {
     override val name: String
         get() = worldObject.name
 
@@ -44,8 +44,5 @@ class RandomEncounters {
     /**
      * Randomly generate an encounter from the registered templates.
      */
-    fun generateEncounter(): Encounter? {
-        if (templates.isEmpty()) return null
-        return templates.random().invoke()
-    }
+    fun generateEncounter(): Encounter? = templates.randomOrNull()?.invoke()
 }

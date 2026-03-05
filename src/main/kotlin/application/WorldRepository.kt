@@ -20,18 +20,16 @@ class WorldRepository {
     fun loadWorld(): Map<String, Location> {
         return transaction {
             // 1. Load Locations
-            val locationCache = mutableMapOf<UUID, BaseLocation>()
-            val nameToLocation = mutableMapOf<String, Location>()
-
-            WorldInitialization.Locations.selectAll().forEach { row ->
-                val loc = BaseLocation(
-                    id = row[WorldInitialization.Locations.id].value.toString(),
+            val locationCache = WorldInitialization.Locations.selectAll().associate { row ->
+                val id = row[WorldInitialization.Locations.id].value
+                id to BaseLocation(
+                    id = id.toString(),
                     name = row[WorldInitialization.Locations.name],
-                    description = row[WorldInitialization.Locations.description]
+                    description = row[WorldInitialization.Locations.description],
                 )
-                locationCache[row[WorldInitialization.Locations.id].value] = loc
-                nameToLocation[loc.name] = loc
             }
+
+            val nameToLocation = locationCache.values.associateBy { it.name }
 
             // 2. Load World Objects and assign them to locations
             WorldInitialization.WorldObjects.selectAll().forEach { row ->
@@ -43,7 +41,9 @@ class WorldRepository {
                     width = row[WorldInitialization.WorldObjects.width] ?: 1.0,
                     length = row[WorldInitialization.WorldObjects.length] ?: 1.0,
                     weight = row[WorldInitialization.WorldObjects.weight] ?: 1.0,
-                    tags = row[WorldInitialization.WorldObjects.tags].split(",").filter { it.isNotBlank() }.toMutableSet()
+                    tags = row[WorldInitialization.WorldObjects.tags].split(",")
+                        .filter { it.isNotBlank() }
+                        .toMutableSet(),
                 )
                 
                 val locId = row[WorldInitialization.WorldObjects.locationId]?.value
@@ -88,8 +88,10 @@ class WorldRepository {
                         description = row[WorldInitialization.LivingThings.description],
                         health = row[WorldInitialization.LivingThings.health],
                         height = row[WorldInitialization.LivingThings.height],
-                        traits = row[WorldInitialization.LivingThings.traits].split(",").filter { it.isNotBlank() }.toMutableSet(),
-                        location = loc
+                        traits = row[WorldInitialization.LivingThings.traits].split(",")
+                            .filter { it.isNotBlank() }
+                            .toMutableSet(),
+                        location = loc,
                     )
                 }.firstOrNull()
         }
