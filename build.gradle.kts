@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val kotlinxCoRoutinesVersion = "1.9.0"
 
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "2.1.0"
     application
 }
 
@@ -37,8 +37,10 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "17"
+tasks.withType<KotlinCompile>().configureEach {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+    }
 }
 
 tasks.withType<Test> {
