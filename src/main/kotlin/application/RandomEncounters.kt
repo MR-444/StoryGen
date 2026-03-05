@@ -1,20 +1,11 @@
 package application
 
 //  This class manages the random encounter
-//  - random encounter with monsters (e.g. a dog)
-//  - random encounter with real world objects  (e.g. a tree)
+//  - random encounter with characters
+//  - random encounter with real world objects
 
-
-// interaction with encounters in both directions.
-// interaction with the environment
-
-import domain.livingThing.Dog
-import domain.livingThing.Monster
-import domain.location.Location
-import domain.location.LocationFactory
-import domain.realWorldObject.IRealWorldObject
-import domain.realWorldObject.RealWorldObject
-import kotlin.random.Random
+import domain.livingThing.Character
+import domain.realWorldObject.WorldObject
 
 // Define an interface for an Encounter
 interface Encounter {
@@ -22,33 +13,39 @@ interface Encounter {
     fun interact(): String
 }
 
-// Concrete implementation for Monster encounter
-class MonsterEncounter(private val monster: Monster) : Encounter {
+// Concrete implementation for Character encounter
+class CharacterEncounter(private val character: Character) : Encounter {
     override val name: String
-        get() = monster.name
+        get() = character.name
 
-    override fun interact() = "You encounter a wild $name. Prepare for battle!"
+    override fun interact() = "You encounter ${character.name} the ${character.type}. ${character.description}"
 }
 
 // Concrete implementation for RealWorldObject encounter
-class RealWorldObjectEncounter(private val realWorldObject: IRealWorldObject) : Encounter {
+class RealWorldObjectEncounter(private val worldObject: WorldObject) : Encounter {
     override val name: String
-        get() = realWorldObject.javaClass.simpleName
+        get() = worldObject.name
 
     override fun interact() = "You see a $name. It might be useful..."
 }
 
-// This class manages the random encounters
+// This class manages the random encounters using a Registry pattern
 class RandomEncounters {
-    private val locationFactory = LocationFactory()
+    private val templates = mutableListOf<() -> Encounter>()
 
-    // Randomly generate an encounter
-    fun generateEncounter(): Encounter {
-        val encounterType = Random.nextInt(0, 2)
-        return when (encounterType) {
-            0 -> MonsterEncounter(Dog("Fido", 100, locationFactory.create(Location.PlayGround), 21.0))
-            else -> RealWorldObjectEncounter(RealWorldObject("Tree", "A tall tree", 10, 10, 10, 10))
-        }
+    /**
+     * Register an encounter template (a lambda that creates the encounter).
+     * This allows adding new encounters at runtime without modifying this class.
+     */
+    fun register(template: () -> Encounter) {
+        templates.add(template)
+    }
+
+    /**
+     * Randomly generate an encounter from the registered templates.
+     */
+    fun generateEncounter(): Encounter? {
+        if (templates.isEmpty()) return null
+        return templates.random().invoke()
     }
 }
-

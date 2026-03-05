@@ -1,70 +1,69 @@
 package application
 
-import domain.livingThing.Dog
-import domain.location.Location
-import domain.location.LocationFactory
-import domain.realWorldObject.LargeBoxFactory
-import domain.realWorldObject.RealWorldObject
-import domain.realWorldObject.SmallBoxFactory
+import domain.location.Direction
 
+fun main(args: Array<String>) {
 
-fun main() {
+    // 1. Initialize DB Infrastructure
+    val worldInit = WorldInitialization()
+    worldInit.initSchema()
 
-    WorldInitialization().also {
-        it.create()
+    // 2. Seed if requested
+    if (args.contains("--seed")) {
+        println("Seeding database with test data...")
+        worldInit.seedTestWorld()
     }
 
-    // instantiate objects
-    val playGround = LocationFactory().create(Location.PlayGround)
-    val pond = LocationFactory().create(Location.Pond)
+    // 3. Load entire world from persistence
+    val repository = WorldRepository()
+    val world = repository.loadWorld()
+    
+    if (world.isEmpty()) {
+        println("The world is empty! Run with --seed to populate it.")
+        return
+    }
 
-    val fido = Dog(
-        name = "Fido",
-        health = 100,
-        location = playGround,
-        height = 21.0
-    )
+    // 4. Load Actor
+    val fido = repository.loadCharacter("Fido", world)
+    
+    if (fido == null) {
+        println("Could not find Fido in the repository.")
+        return
+    }
+
+    val playground = world["Playground"] ?: fido.location
+
+    // Setup Random Encounters Registry (Keeping it in memory for now as a dynamic component)
+    val encounters = RandomEncounters().apply {
+        world.values.forEach { loc ->
+            loc.containingObjects.forEach { obj ->
+                register { RealWorldObjectEncounter(obj) }
+            }
+        }
+        val aria = repository.loadCharacter("Aria", world)
+        if (aria != null) {
+            register { CharacterEncounter(aria) }
+        }
+    }
 
     // story begins.
-    println("All begins with the ${fido.javaClass.simpleName}...")
-
-    println(fido)
-
-    println("The ${fido.javaClass.simpleName} called ${fido.name} makes ${fido.bark}.")
-    println("And is ${fido.healthToLiteral()}.")
-
-    // move the dog around in one location.
-    println()
-    println("${fido.name} runs happily around in the ${playGround.name}.")
+    println("\n--- The Persistence-Driven Story Begins ---")
+    println("Fido the ${fido.type} wakes up in the ${fido.location.name}.")
 
     // look around
-    fido.lookAround()
+    println(fido.lookAround().message)
 
-    // =======================================================================
-    // let's travel the dog between 2 locations
-    println()
-    fido.moveToAndBack(pond, null)
+    // travel according to the logical graph in the DB
+    println("\nMoving East...")
+    fido.move(Direction.EAST).forEach { println(it.message) }
 
-    // let's travel the dog between 2 locations
-    // and put an obstacle between the locations.
-    val smallBox = SmallBoxFactory().create()
-    fido.moveToAndBack(pond, smallBox)
+    // Random Encounter!
+    println("\nSomething unexpected happens...")
+    val incident = encounters.generateEncounter()
+    println(incident?.interact() ?: "The world remains quiet.")
 
-    // let's travel the dog between 2 locations
-    // and put an obstacle between the locations which is too big to jump over.
-    val largeBox = LargeBoxFactory().create()
-
-    fido.moveToAndBack(pond, largeBox)
-
-    //show travel history
-    println()
-    fido.say("I ran around a lot: ")
-    fido.printLocationHistory()
-
-    println()
-    fido.say("I am tracking the whole locations back now.")
-    fido.backTrack()
+    println("\nHeading back...")
+    fido.move(Direction.WEST).forEach { println(it.message) }
+    
+    println("\nLocation history for Fido: ${fido.locationHistory.map { it.name }}")
 }
-
-
-

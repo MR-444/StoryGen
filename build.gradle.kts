@@ -38,7 +38,7 @@ tasks.withType<Test> {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "17"
 }
 
 tasks.withType<Test> {
@@ -46,5 +46,5 @@ tasks.withType<Test> {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("application.MainKt")
 }
