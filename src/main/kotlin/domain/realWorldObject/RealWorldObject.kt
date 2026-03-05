@@ -1,10 +1,14 @@
 package domain.realWorldObject
 
+import java.util.UUID
+
 data class RealWorldObject(
+    override val id: String = UUID.randomUUID().toString(),
     override val name: String,
-    override var description: String,
-    override var height: Int,
-    override var width: Int,
-    override var length: Int,
-    override var weight: Int
-) : IRealWorldObject
+    override val description: String,
+    override var height: Double,
+    override var width: Double,
+    override var length: Double,
+    override var weight: Double,
+    val tags: MutableSet<String> = mutableSetOf()
+) : WorldObject
