@@ -1,75 +1,29 @@
-Todos:
-- more things which can happen when moving around.
-  - random encounters
-    - interaction with encounters in both directions.
-- implement the jumpable objects as real object in a location.
+StoryGen Roadmap:
 
-- create 3 objects,
-- randomize their occurrence in a location.
+High Priority (Immediate Next Steps)
+------------------------------------
+- **Trait-Based Logic**: Implement code that checks character traits during actions. 
+  - Example: A character with "can_fly" can use "Sky" exits. 
+  - Example: A character with "strong" can move "heavy" objects.
+  - *Desirability: High. This makes the LLM's trait definitions functionally relevant.*
+- **Inventory System**: Allow characters to `take` and `drop` WorldObjects.
+  - *Desirability: High. Essential for puzzle-solving and story progression.*
+- **LLM JSON Bridge**: Create an adapter to export the state as JSON and ingest actions from an LLM.
+  - *Desirability: Critical. The primary goal of the project.*
 
+Secondary Goals (Polish & Depth)
+--------------------------------
+- **Dialogue System**: Expand encounters to support multi-turn dialogue trees.
+- **World Event Hooks**: Allow the world to trigger events (e.g., "OnEnterLocation" triggers a trap if a character has the "clumsy" trait).
+- **Persistent Character History**: Log all meaningful events (not just locations) for the LLM to use as memory.
 
-far future
--------------
-- think about how you want to represent a large number of objects like livingThings or realwordobjects.
-  to build 1000 classes for 1000 animals would be a bad idea?
-  (put only the description in a config file? (db?)
-  => Initialize with a DB
-  => todo: you have to build the relations
-  => save the initialized structures and do not forget the relations!
-
-
-
-done
+Done
 ----
-- Sophisticate the memory (Use H2 or asami (https://github.com/threatgrid/asami) )
-  how to integrate h2: https://stackoverflow.com/questions/48357523/how-to-use-kotlin-with-h2-and-sqlite-in-intellij
-- Say <subject> go to <direction> when visiting a new unknown location give a name to it in dependence to the attributes
-  of the location.
-- let have locations objects Working on.
-- command: look at (location/object)
-
-
-
--Build a object builder
--read the objects from the persistence layer created by the builder.
-- interface InteractionBehavior {
-      fun interactWithEnvironment(): String
-  }
-
-  class BarkInteractionBehavior : InteractionBehavior {
-      override fun interactWithEnvironment(): String {
-          return "The dog barks at the environment."
-      }
-  }
-
-  class GrowlInteractionBehavior : InteractionBehavior {
-      override fun interactWithEnvironment(): String {
-          return "The monster growls at the environment."
-      }
-  }
-
-  abstract class Monster(
-      open val name: String,
-      open var health: Int,
-      open var location: ILocation
-  ) : LandDweller {
-      abstract var interactionBehavior: InteractionBehavior
-
-      fun interact() {
-          println(interactionBehavior.interactWithEnvironment())
-      }
-
-      // ... existing Monster methods ...
-  }
-
-  class Dog(
-      override val name: String,
-      override var health: Int,
-      override var location: ILocation
-  ) : Monster(name, health, location) {
-      override var interactionBehavior: InteractionBehavior = BarkInteractionBehavior()
-
-      // ... existing Dog methods ...
-  }
-
-
+- [x] Data-Driven Character System (Universal class).
+- [x] Data-Driven Object System (Universal class + Tags).
+- [x] Data-Driven Location System (Graph-based + Exits).
+- [x] Database Persistence (H2 with Exposed).
+- [x] Decoupled Initialization (Schema vs. Seeding).
+- [x] Dynamic Encounter Registry.
+- [x] User Verification/Test System (`UserInteractionTest.kt`).
+- [x] Persistent Traits & Tags (added to DB).
