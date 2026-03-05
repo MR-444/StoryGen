@@ -19,47 +19,41 @@ data class Character(
     override var width: Double = 1.0,
     override var length: Double = 1.0,
     override var weight: Double = 70.0,
-    val traits: MutableSet<String> = mutableSetOf()
+    val traits: MutableSet<String> = mutableSetOf(),
 ) : Entity, PhysicalBody {
 
-    val locationHistory = LinkedList<Location>()
+    val locationHistory = ArrayDeque<Location>()
 
     fun healthToLiteral() = Health.fromValue(health).text
 
     fun say(s: String) = Event("$name ($type) says: $s", this, location)
 
-    fun lookAt(worldObject: WorldObject): Event {
-        return Event("$name ($type) looks at ${worldObject.name}. ${worldObject.description}", this, location)
-    }
+    fun lookAt(worldObject: WorldObject) =
+        Event("$name ($type) looks at ${worldObject.name}. ${worldObject.description}", this, location)
 
-    fun lookAround(): Event {
-        val objects = location.containingObjects.joinToString(", ") { it.name }
-        return Event("$name ($type) looks around and sees: $objects", this, location)
-    }
+    fun lookAround() =
+        Event("$name ($type) looks around and sees: ${location.containingObjects.joinToString(", ") { it.name }}", this, location)
 
-    fun move(direction: Direction, obstacle: WorldObject? = null): List<Event> {
-        val events = mutableListOf<Event>()
+    fun move(direction: Direction, obstacle: WorldObject? = null): List<Event> = buildList {
         val destination = location.exits[direction]
 
         if (destination == null) {
-            events.add(Event("$name ($type) bumped into something trying to go $direction.", this, location))
-            return events
+            add(Event("$name ($type) bumped into something trying to go $direction.", this@Character, location))
+            return@buildList
         }
 
         if (obstacle != null) {
-            events.add(Event("Command: $name ($type) move $direction and jump over ${obstacle.name}.", this, location))
+            add(Event("Command: $name ($type) move $direction and jump over ${obstacle.name}.", this@Character, location))
             val jumpEvent = jumpOver(obstacle)
-            events.add(jumpEvent)
+            add(jumpEvent)
             
             if (canJumpOver(obstacle)) {
-                events.add(performMove(destination, direction))
+                add(performMove(destination, direction))
             }
         } else {
-            events.add(Event("Command: $name ($type) move $direction.", this, location))
-            events.add(performMove(destination, direction))
+            add(Event("Command: $name ($type) move $direction.", this@Character, location))
+            add(performMove(destination, direction))
         }
-
-        return events
     }
 
     private fun performMove(destination: Location, direction: Direction): Event {
@@ -87,14 +81,10 @@ data class Character(
         return Event("Location History for $name: $history", this, location)
     }
 
-    fun backTrack(): List<Event> {
-        val events = mutableListOf<Event>()
-        events.add(Event("Character $name is backtracking:", this, location))
-        val it = locationHistory.descendingIterator()
-        while (it.hasNext()) {
-            val n = it.next()
-            events.add(Event("Visited: ${n.name}", this, location))
+    fun backTrack(): List<Event> = buildList {
+        add(Event("Character $name is backtracking:", this@Character, location))
+        locationHistory.reversed().forEach { n ->
+            add(Event("Visited: ${n.name}", this@Character, location))
         }
-        return events
     }
 }
