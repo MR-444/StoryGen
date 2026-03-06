@@ -1,6 +1,6 @@
 package domain.core
 
-sealed interface PhysicalBody {
+interface PhysicalBody {
     var height: Double
     var width: Double
     var length: Double

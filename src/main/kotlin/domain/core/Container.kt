@@ -2,7 +2,7 @@ package domain.core
 
 import domain.realWorldObject.WorldObject
 
-sealed interface Container {
+interface Container {
     val containingObjects: MutableSet<WorldObject>
 
 }

@@ -21,7 +21,7 @@ dependencies {
     implementation("org.jetbrains.exposed", "exposed-dao", "0.48.0")
     implementation("org.jetbrains.exposed", "exposed-jdbc", "0.48.0")
 
-    implementation("com.h2database:h2:2.2.224") // H2 Database
+    implementation("com.h2database:h2:2.4.240") // H2 Database
     implementation("org.slf4j:slf4j-api:2.0.12") // logger
     implementation("ch.qos.logback:logback-classic:1.5.3") // logback dependency
     //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxCoRoutinesVersion")
